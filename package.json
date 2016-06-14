@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/jameswestnz/htpc-proxy/issues"
   },
-  "homepage": "https://github.com/jameswestnz/htpc-proxy#readme"
+  "homepage": "https://github.com/jameswestnz/htpc-proxy#readme",
+  "dependencies": {
+    "h2o2": "^5.1.0",
+    "hapi": "^13.4.1",
+    "ngrok": "^2.2.0",
+    "npmlog": "^3.0.0",
+    "rc": "^1.1.6"
+  }
 }
