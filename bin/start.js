@@ -43,7 +43,11 @@ log = defaultsDeep(log, options.log);
 server(options)
 .then(function(res){
   log.info(null, 'Started!');
-  log.info('ngrok url', res.url);
+
+  Object.keys(options.apps).map(function(key){
+    var app = options.apps[key];
+    log.info(key, res.url + '/' + key);
+  });
 })
 .catch(function(err){
   // there was an issue starting the server...
