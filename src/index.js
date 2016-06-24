@@ -1,6 +1,7 @@
 const Hapi = require('hapi');
 const Promise = require('promise');
 const ngrok = require('ngrok');
+const defaultsDeep = require('lodash').defaultsDeep;
 
 module.exports = function(options){
   const server = new Hapi.Server();
@@ -64,15 +65,13 @@ var tunnel = function(server, options){
       ngrok.disconnect();
     });
 
-    // connect to ngrok
-    ngrok.connect({
+    var ngrokOptions = defaultsDeep(options.ngrok, {
       proto: 'http',
-      addr: server.info.port,
-      auth: options.ngrok.auth || null,
-      region: options.ngrok.region || null,
-      subdomain: options.ngrok.subdomain || null,
-      authtoken: options.ngrok.authtoken || null
-    }, function (err, url) {
+      addr: server.info.port
+    })
+
+    // connect to ngrok
+    ngrok.connect(ngrokOptions, function (err, url) {
       if(err) reject(err);
 
       fulfill(url)
