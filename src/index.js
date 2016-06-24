@@ -2,6 +2,7 @@ const Hapi = require('hapi');
 const Promise = require('promise');
 const ngrok = require('ngrok');
 const defaultsDeep = require('lodash').defaultsDeep;
+const url = require('url');
 
 module.exports = function(options){
   const server = new Hapi.Server();
@@ -28,14 +29,23 @@ module.exports = function(options){
 
         server.route({
           method: '*',
-          path: '/' + app.name,
-          handler: {
-            proxy: {
-              passThrough: true,
-              host: app.host || '127.0.0.1',
-              port: app.port,
-              protocol: 'http'
+          path: '/' + app.name + '/{p*}',
+          config: {
+            payload: {
+              output: 'stream',
+              parse: false
             }
+          },
+          handler: function(request, reply){
+            return reply.proxy({
+              passThrough: true,
+              uri: url.format({
+                hostname: app.host || '127.0.0.1',
+                port: app.port,
+                protocol: 'http:',
+                pathname: request.path.replace('/' + app.name, '')
+              })
+            });
           }
         });
       });
