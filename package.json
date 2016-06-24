@@ -7,6 +7,9 @@
     "start": "node bin/start.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "htpc-proxy": "bin/script.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/jameswestnz/htpc-proxy.git"
