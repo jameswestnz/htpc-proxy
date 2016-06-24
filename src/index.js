@@ -66,10 +66,10 @@ var tunnel = function(server, options){
 
     // connect to ngrok
     ngrok.connect({
-    	proto: 'http',
-    	addr: server.info.port,
-    	auth: options.ngrok.auth || null,
-    	region: options.ngrok.region || null,
+      proto: 'http',
+      addr: server.info.port,
+      auth: options.ngrok.auth || null,
+      region: options.ngrok.region || null,
       subdomain: options.ngrok.subdomain || null,
       authtoken: options.ngrok.authtoken || null
     }, function (err, url) {
