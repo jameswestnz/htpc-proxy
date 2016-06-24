@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const log = require('npmlog');
 const rc = require('rc');
 const colors = require('colors');
